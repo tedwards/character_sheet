@@ -15,6 +15,9 @@ def getScoreAttrib(node):
 def getNameAttrib(node):
   return getText(node.attributes["name"].childNodes)
 
+def getValueAttrib(node):
+  return getText(node.attributes["value"].childNodes)
+
 def handleDetails(details):
   detail = {}
   for node in details.childNodes:
@@ -53,10 +56,27 @@ def handlePowerStats(powerstats):
       power_list.append(power)
   return power_list
 
+def handleStats(stats):
+  stat_dict = {}
+  for stat in stats:
+    if stat.nodeType != stat.TEXT_NODE:
+      stat_dict[getNameAttrib(stat.getElementsByTagName("alias")[0])] = getValueAttrib(stat)
+  return stat_dict
+          
+
 if __name__ == "__main__":
   dom = xml.dom.minidom.parse("ImmeralLvl3.dnd4e")
 
+  print "Details:"
   pprint(handleDetails(dom.getElementsByTagName("Details")[0]))
+
+  print "\nStats:"
+  pprint(handleStats(dom.getElementsByTagName("Stat")))
+
+  print "\nAbilities:"
   pprint(handleAbilities(dom.getElementsByTagName("AbilityScores")[0]))
+
+  print "\nPowers:"
   for each in handlePowerStats(dom.getElementsByTagName("PowerStats")[0]):
     pprint(each)
+
