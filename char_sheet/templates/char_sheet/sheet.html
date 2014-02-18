@@ -1,0 +1,51 @@
+<div name=name>{{ character.name }}</div><div name=level>{{ character.level }}</div>
+<div name=discription>alignment gender race class</div><div name=xp>{{ character.xp }}</div>
+</hr>
+
+Abilities
+<table>
+  <tr><td>Score</td><td>Mod</td></tr>
+  <tr><td>Str: {{ character.strength }}</td><td>{{ character.strength_mod }}</td></tr>
+  <tr><td>Con: {{ character.constitution }}</td><td>{{ character.constitution_mod }} </td></tr>
+  <tr><td>Dex: {{ character.dexterity }}</td><td>{{ character.dexterity_mod }} </td></tr>
+  <tr><td>Int: {{ character.intelligence }}</td><td>{{ character.intelligence_mod }} </td></tr>
+  <tr><td>Wis: {{ character.wisdom }}</td><td>{{ character.wisdom_mod }}</td></tr>
+  <tr><td>Cha: {{ character.charisma }}</td><td>{{ character.charisma_mod }}</td></tr>
+</table></br>
+
+Defenses
+<ul>
+  <li>AC:   {{ character.ac }}</li>
+  <li>Fort: {{ character.fortitude }}</li>
+  <li>Ref:  {{ character.reflex }}</li>
+  <li>Will: {{ character.will }}</li>
+</ul>
+
+Skills
+<ul>
+  <li>Acrobatics:    {{ character.acrobatics }}</li>
+  <li>Arcana:        {{ character.arcana }}</li>
+  <li>Athletics:     {{ character.athletics }}</li>
+  <li>Bluff:         {{ character.bluff }}</li>
+  <li>Diplomacy:     {{ character.diplomacy }}</li>
+  <li>Dungeoneering: {{ character.dungeoneering }}</li>
+  <li>Endurance:     {{ character.endurance }}</li>
+  <li>Heal:          {{ character.heal }}</li>
+  <li>History:       {{ character.history }}</li>
+  <li>Insight:       {{ character.insight }}</li>
+  <li>Intimidate:    {{ character.intimidate }}</li>
+  <li>Nature:        {{ character.nature }}</li>
+  <li>Perception:    {{ character.perception }}</li>
+  <li>Religion:      {{ character.religion }}</li>
+  <li>Stealth:       {{ character.stealth }}</li>
+  <li>Streetwise:    {{ character.streetwise }}</li>
+  <li>thievery:      {{ character.thievery }}</li>
+</ul>
+
+Combat Statistics and Skills
+<ul>
+  <li>Initiative:         {{ character.initiative }}</li>
+  <li>Passive Insight:    {{ character.passive_insight }}</li>
+  <li>Passive Perception: {{ character.passive_perception }}</li>
+  <li>Speed:              {{ character.speed }}</li>
+</ul>
