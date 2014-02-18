@@ -20,7 +20,7 @@ class Characters(models.Model):
   strength            = models.PositiveSmallIntegerField()
   constitution        = models.PositiveSmallIntegerField()
   dexterity           = models.PositiveSmallIntegerField()
-  intellignece        = models.PositiveSmallIntegerField()
+  intelligence        = models.PositiveSmallIntegerField()
   wisdom              = models.PositiveSmallIntegerField()
   charisma            = models.PositiveSmallIntegerField()
   strength_mod        = models.SmallIntegerField()
