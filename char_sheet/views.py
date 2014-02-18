@@ -19,8 +19,8 @@ def createCharacter(request):
   stats = handleStats(dom.getElementsByTagName("Stat"))
 
   character = Characters(
-      user = Users.objects.get(pk=1),
-      name = str(details["name"]),
+      user               = Users.objects.get(pk=1),
+      name               = str(details["name"]),
       xp                 = int(details["Experience"]),
       level              = int(details["Level"]),
       death_save_count   = int(stats["Death Saves Count"]),
