@@ -18,13 +18,13 @@ class Characters(models.Model):
 
   # abilities
   strength            = models.PositiveSmallIntegerField()
-  constitiution       = models.PositiveSmallIntegerField()
+  constitution       = models.PositiveSmallIntegerField()
   dexterity           = models.PositiveSmallIntegerField()
   intellignece        = models.PositiveSmallIntegerField()
   wisdom              = models.PositiveSmallIntegerField()
   charisma            = models.PositiveSmallIntegerField()
   strength_mod        = models.SmallIntegerField()
-  constitiution_mod   = models.SmallIntegerField()
+  constitution_mod   = models.SmallIntegerField()
   dexterity_mod       = models.SmallIntegerField() 
   intelligence_mod    = models.SmallIntegerField()
   wisdom_mod          = models.SmallIntegerField()
@@ -50,7 +50,7 @@ class Characters(models.Model):
   intimidate          = models.SmallIntegerField()
   nature              = models.SmallIntegerField()
   perception          = models.SmallIntegerField()
-  religon             = models.SmallIntegerField()
+  religion             = models.SmallIntegerField()
   stealth             = models.SmallIntegerField()
   streetwise          = models.SmallIntegerField()
   thievery            = models.SmallIntegerField()
@@ -60,4 +60,3 @@ class Characters(models.Model):
   passive_insight     = models.PositiveSmallIntegerField()
   passive_perception  = models.PositiveSmallIntegerField()
   speed               = models.PositiveSmallIntegerField()
-

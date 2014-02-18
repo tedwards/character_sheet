@@ -1,6 +1,7 @@
 import xml.dom.minidom
 from pprint import pprint
 
+# dom = xml.dom.minidom.parse("ImmeralLvl3.dnd4e")
 
 def getText(nodes):
   text = []
@@ -65,7 +66,6 @@ def handleStats(stats):
           
 
 if __name__ == "__main__":
-  dom = xml.dom.minidom.parse("ImmeralLvl3.dnd4e")
 
   print "Details:"
   pprint(handleDetails(dom.getElementsByTagName("Details")[0]))
