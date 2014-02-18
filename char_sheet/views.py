@@ -2,6 +2,7 @@
 from django.http import HttpResponse
 from django.core.files import File
 from django.conf import settings
+from django.shortcuts import render
 
 from char_sheet.models import Characters, Users
 from character_sheet.DND4Eparser import *
@@ -30,7 +31,7 @@ def createCharacter(request):
       strength           = int(stats["Strength"]),
       constitution       = int(stats["Constitution"]),
       dexterity          = int(stats["Dexterity"]),
-      intellignece       = int(stats["Intelligence"]),
+      intelligence       = int(stats["Intelligence"]),
       wisdom             = int(stats["Wisdom"]),
       charisma           = int(stats["Charisma"]),
       strength_mod       = int(stats["Strength modifier"]),
@@ -68,3 +69,9 @@ def createCharacter(request):
   character.save()
   return HttpResponse("Character %s created." % (str(details["name"])))
 
+def displayCharacter(request):
+  character = Characters.objects.get(pk=1)
+
+  context = {'character': character}
+
+  return render(request, 'char_sheet/sheet.html', context)
