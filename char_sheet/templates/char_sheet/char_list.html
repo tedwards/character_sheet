@@ -3,6 +3,6 @@
 <a href="/char_sheet/createCharacter/">Upload New Character</a></br>
 <ul>
   {% for character in characters %}
-  <li><a href="/char_sheet/displayCharacter/{{ character.id }}">{{ character.name }}</a></li>
+  <li><a href="/char_sheet/displayCharacter/{{ character.id }}">{{ character.name }}</a>&nbsp;<a href="/char_sheet/deleteCharacter/{{ character.id }}">-</a></li>
   {% endfor %}
 </ul>

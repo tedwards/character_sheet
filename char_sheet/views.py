@@ -1,25 +1,29 @@
-# Create your views here.
-from django.http import HttpResponse
 from django.contrib.auth.models import User
-from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, render_to_response
-from django.core.files import File
-from django.conf import settings
+from django.shortcuts import render
 
 from char_sheet.models import Characters
 from character_sheet.DND4Eparser import *
 from xml.dom import minidom
 from .forms import UploadFileForm
-import os 
+
+def displayCharacter(request, character_id):
+  character = Characters.objects.get(pk=character_id)
+  context = {'character': character}
+  return render(request, 'char_sheet/sheet.html', context)
 
 @login_required
 def userView(request):
   user = User.objects.get(username=request.user)
   characters = Characters.objects.filter(user=user)
   return render(request, 'char_sheet/char_list.html', {"user":user,"characters":characters})
+
+@login_required
+def deleteCharacter(request, character_id):
+  character = Characters.objects.get(pk=character_id)
+  character.delete()
+  return HttpResponseRedirect('/char_sheet/')
 
 @login_required
 def createCharacter(request):
@@ -29,11 +33,15 @@ def createCharacter(request):
       dom = minidom.parse(request.FILES['file'])
       details = handleDetails(dom.getElementsByTagName("Details")[0])
       stats = handleStats(dom.getElementsByTagName("Stat"))
+      if details["Experience"]:
+        experience = int(details["Experience"]),
+      else:
+        experience = 0
 
       character = Characters(
           user               = User.objects.get(username=request.user),
           name               = str(details["name"]),
-          xp                 = int(details["Experience"]),
+          xp                 = int(experience),
           level              = int(details["Level"]),
           death_save_count   = int(stats["Death Saves Count"]),
           healing_surges     = int(stats["Healing Surges"]),
@@ -83,9 +91,4 @@ def createCharacter(request):
     form = UploadFileForm()
   return render(request, "char_sheet/upload.html", {"form": form})
 
-def displayCharacter(request, character_id):
-  character = Characters.objects.get(pk=character_id)
 
-  context = {'character': character}
-
-  return render(request, 'char_sheet/sheet.html', context)
