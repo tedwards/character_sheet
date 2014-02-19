@@ -15,37 +15,11 @@ from xml.dom import minidom
 from forms import UserForm
 import os 
 
-#@login_required('/char_sheet/login/')
-def index(request):
-  if request.user.is_anonymous():
-    return HttpResponseRedirect("/char_sheet/login/")
-  else:
-    user = User.objects.get(username=request.user)
-    characters = Characters.objects.filter(user=user)
-    return render(request, 'char_sheet/char_list.html', {"user":user,"characters":characters})
-
-def loginView(request):
-  request.session.set_test_cookie()
-  if request.method == "POST":
-    form = AuthenticationForm(request, request.POST)
-    if form.is_valid():
-      login(request, form.get_user())
-      return HttpResponseRedirect("/char_sheet/")
-  else:
-    form = AuthenticationForm()
-  return render(request, 'char_sheet/newUser.html', {'form': form})
-
-
-def newUser(request):
-  print request.user
-  if request.method == "POST":
-    form = UserCreationForm(request.POST)
-    if form.is_valid():
-      new_user = form.save()
-      return HttpResponseRedirect('/char_sheet/')
-  else:
-    form = UserCreationForm()
-  return render(request, 'char_sheet/newUser.html', {'form': form})
+@login_required
+def userView(request):
+  user = User.objects.get(username=request.user)
+  characters = Characters.objects.filter(user=user)
+  return render(request, 'char_sheet/char_list.html', {"user":user,"characters":characters})
 
 @login_required
 def createCharacter(request):

@@ -104,6 +104,7 @@ MIDDLEWARE_CLASSES = (
 )
 
 ROOT_URLCONF = 'character_sheet.urls'
+LOGIN_URL = '/accounts/login/'
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'character_sheet.wsgi.application'
@@ -124,6 +125,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'accounts',
     'char_sheet',
 )
 
