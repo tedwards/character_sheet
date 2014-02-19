@@ -1,4 +1,6 @@
-{{ user.username }} <a href"/accounts/logout/">Logout</a>
+{{ user.username }} </br>
+<a href="/accounts/logout">Logout</a></br>
+<a href="/char_sheet/createCharacter/">Upload New Character</a></br>
 <ul>
   {% for character in characters %}
   <li><a href="/char_sheet/displayCharacter/{{ character.id }}">{{ character.name }}</a></li>
