@@ -1,4 +1,4 @@
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
@@ -14,6 +14,8 @@ def loginView(request):
     if form.is_valid():
       login(request, form.get_user())
       return HttpResponseRedirect("/char_sheet/")
+    else:
+      return HttpResponseRedirect("/char_sheet/")
   else:
     form = AuthenticationForm()
     new_user = True
@@ -28,7 +30,6 @@ def newUser(request):
     form = UserCreationForm(request.POST)
     if form.is_valid():
       new_user = form.save()
-      login(request, new_user)
       return HttpResponseRedirect("/char_sheet/")
   else:
     form = UserCreationForm()
