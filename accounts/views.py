@@ -18,6 +18,13 @@ def loginView(request):
     form = AuthenticationForm()
   return render(request, "accounts/form.html", {"form": form})
 
+def logoutView(request):
+  user = User.objects.get(username=request.user)
+  if user not None:
+    logout(user)
+    return HttpResponseRedirect('account/login/')
+  return HttpResponseRedirect('account/login/')
+
 def newUser(request):
   print request.user
   if request.method == "POST":

@@ -1,4 +1,4 @@
-{{ user.username }}
+{{ user.username }} <a href"/accounts/logout/">Logout</a>
 <ul>
   {% for character in characters %}
   <li><a href="/char_sheet/displayCharacter/{{ character.id }}">{{ character.name }}</a></li>
