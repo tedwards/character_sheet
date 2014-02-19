@@ -16,7 +16,8 @@ def loginView(request):
       return HttpResponseRedirect("/char_sheet/")
   else:
     form = AuthenticationForm()
-  return render(request, "accounts/form.html", {"form": form})
+    new_user = True
+  return render(request, "accounts/form.html", {"form": form, "new_user": new_user})
 
 def logoutView(request):
   logout(request)
@@ -33,5 +34,3 @@ def newUser(request):
   else:
     form = UserCreationForm()
   return render(request, "accounts/form.html", {"form": form})
-
-
