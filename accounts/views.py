@@ -24,12 +24,11 @@ def logoutView(request):
   return HttpResponseRedirect('/accounts/login/')
 
 def newUser(request):
-  print request.user
   if request.method == "POST":
     form = UserCreationForm(request.POST)
     if form.is_valid():
       new_user = form.save()
-      login(new_user)
+      login(request, new_user)
       return HttpResponseRedirect("/char_sheet/")
   else:
     form = UserCreationForm()
