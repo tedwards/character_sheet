@@ -22,8 +22,8 @@ def logoutView(request):
   user = User.objects.get(username=request.user)
   if user not None:
     logout(user)
-    return HttpResponseRedirect('account/login/')
-  return HttpResponseRedirect('account/login/')
+    return HttpResponseRedirect('/accounts/login/')
+  return HttpResponseRedirect('/accounts/login/')
 
 def newUser(request):
   print request.user
