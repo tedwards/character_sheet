@@ -1,0 +1,6 @@
+{{ user.username }}
+<ul>
+  {% for character in characters %}
+  <li><a href="/char_sheet/displayCharacter/{{ character.id }}">{{ character.name }}</a></li>
+  {% endfor %}
+</ul>

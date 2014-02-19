@@ -1,18 +1,53 @@
 # Create your views here.
 from django.http import HttpResponse
+from django.contrib.auth.models import User
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, render_to_response
 from django.core.files import File
 from django.conf import settings
-from django.shortcuts import render
 
-from char_sheet.models import Characters, Users
+from char_sheet.models import Characters
 from character_sheet.DND4Eparser import *
 from xml.dom import minidom
-
+from forms import UserForm
 import os 
 
+#@login_required('/char_sheet/login/')
 def index(request):
-  return HttpResponse("Character Sheet Working")
+  if request.user.is_anonymous():
+    return HttpResponseRedirect("/char_sheet/login/")
+  else:
+    user = User.objects.get(username=request.user)
+    characters = Characters.objects.filter(user=user)
+    return render(request, 'char_sheet/char_list.html', {"user":user,"characters":characters})
 
+def loginView(request):
+  request.session.set_test_cookie()
+  if request.method == "POST":
+    form = AuthenticationForm(request, request.POST)
+    if form.is_valid():
+      login(request, form.get_user())
+      return HttpResponseRedirect("/char_sheet/")
+  else:
+    form = AuthenticationForm()
+  return render(request, 'char_sheet/newUser.html', {'form': form})
+
+
+def newUser(request):
+  print request.user
+  if request.method == "POST":
+    form = UserCreationForm(request.POST)
+    if form.is_valid():
+      new_user = form.save()
+      return HttpResponseRedirect('/char_sheet/')
+  else:
+    form = UserCreationForm()
+  return render(request, 'char_sheet/newUser.html', {'form': form})
+
+@login_required
 def createCharacter(request):
   f = open(os.path.join(settings.PROJECT_ROOT,"ImmeralLvl3.dnd4e"))
   dom = minidom.parse(f)
@@ -20,7 +55,7 @@ def createCharacter(request):
   stats = handleStats(dom.getElementsByTagName("Stat"))
 
   character = Characters(
-      user               = Users.objects.get(pk=1),
+      user               = User.objects.get(username=request.user),
       name               = str(details["name"]),
       xp                 = int(details["Experience"]),
       level              = int(details["Level"]),
@@ -69,8 +104,8 @@ def createCharacter(request):
   character.save()
   return HttpResponse("Character %s created." % (str(details["name"])))
 
-def displayCharacter(request):
-  character = Characters.objects.get(pk=1)
+def displayCharacter(request, character_id):
+  character = Characters.objects.get(pk=character_id)
 
   context = {'character': character}
 

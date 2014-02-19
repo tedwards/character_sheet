@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -7,7 +8,7 @@ class Users(models.Model):
 
 class Characters(models.Model):
   # char info
-  user                = models.ForeignKey(Users)
+  user                = models.ForeignKey(User)
   name                = models.CharField(max_length=50)
   xp                  = models.PositiveIntegerField()
   level               = models.PositiveIntegerField()
