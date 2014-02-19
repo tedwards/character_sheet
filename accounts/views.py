@@ -1,4 +1,4 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
@@ -19,10 +19,7 @@ def loginView(request):
   return render(request, "accounts/form.html", {"form": form})
 
 def logoutView(request):
-  user = User.objects.get(username=request.user)
-  if user not None:
-    logout(user)
-    return HttpResponseRedirect('/accounts/login/')
+  logout(request)
   return HttpResponseRedirect('/accounts/login/')
 
 def newUser(request):
