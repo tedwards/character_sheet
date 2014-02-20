@@ -1,3 +1,17 @@
+<style>
+  tr:nth-child(even) {
+    background-color: #ffffff;
+  }
+  tr:nth-child(odd) {
+    background-color: #999999;
+  }
+  li:nth-child(even) {
+    background-color: #ffffff;
+  }
+  li:nth-child(even) {
+    background-color: #999999;
+  }
+</style>
 <div name=name>{{ character.name }}</div><div name=level>{{ character.level }}</div>
 <div name=discription>alignment gender race class</div><div name=xp>{{ character.xp }}</div>
 </hr>
@@ -5,47 +19,58 @@
 Abilities
 <table>
   <tr><td>Score</td><td>Mod</td></tr>
-  <tr><td>Str: {{ character.strength }}</td><td>{{ character.strength_mod }}</td></tr>
-  <tr><td>Con: {{ character.constitution }}</td><td>{{ character.constitution_mod }} </td></tr>
-  <tr><td>Dex: {{ character.dexterity }}</td><td>{{ character.dexterity_mod }} </td></tr>
-  <tr><td>Int: {{ character.intelligence }}</td><td>{{ character.intelligence_mod }} </td></tr>
-  <tr><td>Wis: {{ character.wisdom }}</td><td>{{ character.wisdom_mod }}</td></tr>
-  <tr><td>Cha: {{ character.charisma }}</td><td>{{ character.charisma_mod }}</td></tr>
+  <tr><td>Str: {{ character.strength }}     </td><td>{{ character.strength_mod }}</td></tr>
+  <tr><td>Con: {{ character.constitution }} </td><td>{{ character.constitution_mod }} </td></tr>
+  <tr><td>Dex: {{ character.dexterity }}    </td><td>{{ character.dexterity_mod }} </td></tr>
+  <tr><td>Int: {{ character.intelligence }} </td><td>{{ character.intelligence_mod }} </td></tr>
+  <tr><td>Wis: {{ character.wisdom }}       </td><td>{{ character.wisdom_mod }}</td></tr>
+  <tr><td>Cha: {{ character.charisma }}     </td><td>{{ character.charisma_mod }}</td></tr>
 </table></br>
 
 Defenses
-<ul>
-  <li>AC:   {{ character.ac }}</li>
-  <li>Fort: {{ character.fortitude }}</li>
-  <li>Ref:  {{ character.reflex }}</li>
-  <li>Will: {{ character.will }}</li>
-</ul>
+<table name="defenses">
+  <tr><td>AC:   </td><td>{{ character.ac }}</td></tr>
+  <tr><td>Fort: </td><td>{{ character.fortitude }}</td></tr>
+  <tr><td>Ref:  </td><td>{{ character.reflex }}</td></tr>
+  <tr><td>Will: </td><td>{{ character.will }}</td></tr>
+</table></br>
 
 Skills
-<ul>
-  <li>Acrobatics:    {{ character.acrobatics }}</li>
-  <li>Arcana:        {{ character.arcana }}</li>
-  <li>Athletics:     {{ character.athletics }}</li>
-  <li>Bluff:         {{ character.bluff }}</li>
-  <li>Diplomacy:     {{ character.diplomacy }}</li>
-  <li>Dungeoneering: {{ character.dungeoneering }}</li>
-  <li>Endurance:     {{ character.endurance }}</li>
-  <li>Heal:          {{ character.heal }}</li>
-  <li>History:       {{ character.history }}</li>
-  <li>Insight:       {{ character.insight }}</li>
-  <li>Intimidate:    {{ character.intimidate }}</li>
-  <li>Nature:        {{ character.nature }}</li>
-  <li>Perception:    {{ character.perception }}</li>
-  <li>Religion:      {{ character.religion }}</li>
-  <li>Stealth:       {{ character.stealth }}</li>
-  <li>Streetwise:    {{ character.streetwise }}</li>
-  <li>thievery:      {{ character.thievery }}</li>
-</ul>
+<table>
+  <tr><td>Acrobatics:   </td><td>{{ character.acrobatics }}</td></tr>
+  <tr><td>Arcana:       </td><td>{{ character.arcana }}</td></tr>
+  <tr><td>Athletics:    </td><td>{{ character.athletics }}</td></tr>
+  <tr><td>Bluff:        </td><td>{{ character.bluff }}</td></tr>
+  <tr><td>Diplomacy:    </td><td>{{ character.diplomacy }}</td></tr>
+  <tr><td>Dungeoneering:</td><td>{{ character.dungeoneering }}</td></tr>
+  <tr><td>Endurance:    </td><td>{{ character.endurance }}</td></tr>
+  <tr><td>Heal:         </td><td>{{ character.heal }}</td></tr>
+  <tr><td>History:      </td><td>{{ character.history }}</td></tr>
+  <tr><td>Insight:      </td><td>{{ character.insight }}</td></tr>
+  <tr><td>Intimidate:   </td><td>{{ character.intimidate }}</td></tr>
+  <tr><td>Nature:       </td><td>{{ character.nature }}</td></tr>
+  <tr><td>Perception:   </td><td>{{ character.perception }}</td></tr>
+  <tr><td>Religion:     </td><td>{{ character.religion }}</td></tr>
+  <tr><td>Stealth:      </td><td>{{ character.stealth }}</td></tr>
+  <tr><td>Streetwise:   </td><td>{{ character.streetwise }}</td></tr>
+  <tr><td>thievery:     </td><td>{{ character.thievery }}</td></tr>
+</table></br>
 
 Combat Statistics and Skills
-<ul>
-  <li>Initiative:         {{ character.initiative }}</li>
-  <li>Passive Insight:    {{ character.passive_insight }}</li>
-  <li>Passive Perception: {{ character.passive_perception }}</li>
-  <li>Speed:              {{ character.speed }}</li>
-</ul>
+<table>
+  <tr><td>Initiative:         </td><td>{{ character.initiative }}</td></tr>
+  <tr><td>Passive Insight:    </td><td>{{ character.passive_insight }}</td></tr>
+  <tr><td>Passive Perception: </td><td>{{ character.passive_perception }}</td></tr>
+  <tr><td>Speed:              </td><td>{{ character.speed }}</td></tr>
+</table></br>
+
+{% for power in character.powers %}
+<table>{{ power.0.name }}<br/>
+  {% for each in power %}
+  {{ each.name }}:&nbsp; +{{ each.AttackBonus}} vs. {{ each.Defense }},&nbsp; {{ each.Damage }}&nbsp; damage</br>
+  {% endfor %}
+  {% for key, value in power.0.iteritems %}
+  <tr><td> {{ key }} </td><td> {{ value }}</td></tr>
+  {% endfor %}
+</table></br>
+{% endfor %}
