@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from .fields import PickledObjectField
 
 # Create your models here.
 
@@ -61,3 +62,5 @@ class Characters(models.Model):
   passive_insight     = models.PositiveSmallIntegerField()
   passive_perception  = models.PositiveSmallIntegerField()
   speed               = models.PositiveSmallIntegerField()
+
+  powers              = PickledObjectField()
