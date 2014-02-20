@@ -33,8 +33,9 @@ def createCharacter(request):
       dom = minidom.parse(request.FILES['file'])
       details = handleDetails(dom.getElementsByTagName("Details")[0])
       stats = handleStats(dom.getElementsByTagName("Stat"))
+      powers_list = handlePowerStats(dom.getElementsByTagName("PowerStats")[0])
       if details["Experience"]:
-        experience = int(details["Experience"]),
+        experience = details["Experience"]
       else:
         experience = 0
 
@@ -84,6 +85,7 @@ def createCharacter(request):
           passive_insight    = int(stats["Passive Insight"]),
           passive_perception = int(stats["Passive Perception"]),
           speed              = int(stats["Speed"]),
+          powers             = powers_list
           )
       character.save()
       return HttpResponseRedirect('/char_sheet/')
