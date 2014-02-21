@@ -65,12 +65,19 @@ Combat Statistics and Skills
 </table></br>
 
 {% for power in character.powers %}
-<table>{{ power.0.name }}<br/>
-  {% for each in power %}
-  {{ each.name }}:&nbsp; +{{ each.AttackBonus}} vs. {{ each.Defense }},&nbsp; {{ each.Damage }}&nbsp; damage</br>
-  {% endfor %}
+<table width=33%>{{ power.0.name }}<br/>
+  {% if power|length > 1%}
+    {% for each in power %}
+      {% if each.name != power.0.name %}
+        {{ each.name }}:&nbsp; +{{ each.AttackBonus}} vs. {{ each.Defense }},&nbsp; {{ each.Damage }}&nbsp; damage</br>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
   {% for key, value in power.0.iteritems %}
-  <tr><td> {{ key }} </td><td> {{ value }}</td></tr>
+    {% if key.0 != "_" and key != "Class" and key != "name" and value|length > 0 %}
+      <tr><td> {{ key }} </td><td> {{ value }}</td></tr>
+    {% endif %}
   {% endfor %}
 </table></br>
 {% endfor %}
