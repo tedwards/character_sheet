@@ -1,15 +1,30 @@
-<head>
-  {% load sheet_extras %}
-  {% load staticfiles %}
-  <link rel="stylesheet" type="text/css" href="{% static "char_sheet/sheet.css" %}">
-</head>
+{% extends "base.html" %}
+{% load sheet_extras %}
+{% load staticfiles %}
+{%block css %}
+<link rel="stylesheet" type="text/css" href="{% static "char_sheet/sheet.css" %}">
+{% endblock %}
+{% block content %}
+<div name="header" class="jumbotron">
+<div name="name"><h2>{{ character.name }}</h2></div>
 
-<div name=name>{{ character.name }}</div><div name=level>{{ character.level }}</div>
-<div name=discription>alignment gender race class</div><div name=xp>{{ character.xp }}</div>
-</hr>
+<div class="row">
+<div name="level" class="col-md-3"><h3>Level {{ character.level }}</h3></div>
+<div name="description" class="col-md-6"><h3>alignment gender race class</h3></div>
+<div name="xp" class="col-md-3"><h3>XP {{ character.xp }}</h3></div>
+</div>
 
-<table>
-  <th colspan=2>Abilities</th>
+</div>
+
+<div class="row">
+<div class="col-md-3">
+<div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Abilities</h3>
+            </div>
+            <div class="panel-body">
+
+  <table class="table table-striped">
   <tr><td>Score</td><td>Mod</td></tr>
   <tr><td>Str: {{ character.strength }}     </td><td>{{ character.strength_mod }}</td></tr>
   <tr><td>Con: {{ character.constitution }} </td><td>{{ character.constitution_mod }} </td></tr>
@@ -17,18 +32,36 @@
   <tr><td>Int: {{ character.intelligence }} </td><td>{{ character.intelligence_mod }} </td></tr>
   <tr><td>Wis: {{ character.wisdom }}       </td><td>{{ character.wisdom_mod }}</td></tr>
   <tr><td>Cha: {{ character.charisma }}     </td><td>{{ character.charisma_mod }}</td></tr>
-</table></br>
+</table>
+</div>
+</div>
+</div>
 
-<table name="defenses">
-  <th colspan=2>Defenses</th>
+<div class="col-md-3">
+<div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Defenses</h3>
+            </div>
+            <div class="panel-body">
+
+<table name="defenses" class="table table-striped">
   <tr><td>AC:   </td><td>{{ character.ac }}</td></tr>
   <tr><td>Fort: </td><td>{{ character.fortitude }}</td></tr>
   <tr><td>Ref:  </td><td>{{ character.reflex }}</td></tr>
   <tr><td>Will: </td><td>{{ character.will }}</td></tr>
 </table></br>
+</div>
+</div>
+</div>
 
-<table>
-  <th colspan=2>Skills</th>
+<div class="col-md-3">
+<div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Skills</h3>
+            </div>
+            <div class="panel-body">
+
+<table class="table table-striped">
   <tr><td>Acrobatics:   </td><td>{{ character.acrobatics }}</td></tr>
   <tr><td>Arcana:       </td><td>{{ character.arcana }}</td></tr>
   <tr><td>Athletics:    </td><td>{{ character.athletics }}</td></tr>
@@ -47,67 +80,48 @@
   <tr><td>Streetwise:   </td><td>{{ character.streetwise }}</td></tr>
   <tr><td>thievery:     </td><td>{{ character.thievery }}</td></tr>
 </table></br>
+</div>
+</div>
+</div>
 
-Combat Statistics and Skills
-<table>
+<div class="col-md-3">
+<div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Combat Stats and Skills</h3>
+            </div>
+            <div class="panel-body">
+
+<table class="table table-striped">
   <tr><td>Initiative:         </td><td>{{ character.initiative }}</td></tr>
   <tr><td>Passive Insight:    </td><td>{{ character.passive_insight }}</td></tr>
   <tr><td>Passive Perception: </td><td>{{ character.passive_perception }}</td></tr>
   <tr><td>Speed:              </td><td>{{ character.speed }}</td></tr>
 </table></br>
+</div>
+</div>
+</div>
 
+</div>
+
+<div class="col-md-12"><h2>Character Powers</h3></div>
+<div class="row">
 {% for power in character.powers %}
-<div class="{{ power.0|get:'Power Usage' }}">
-  <div class="{{ power.0|get:'Power Usage' }}_Title">
+<div class="col-md-3">
+<div class="{{ power.0|get:'Power Usage' }} panel">
+  <div class="{{ power.0|get:'Power Usage' }}_Title panel-heading">
     <b>{{ power.0.name }}</b>&#9830;<b>{{ power.0|get:'Action Type' }}</b>
   </div>
   {% if power|length > 1%}
   <div class="Weapon">{{ power.1.name }}:&nbsp; +{{ power.1.AttackBonus}} vs. {{ power.1.Defense }},&nbsp; {{ power.1.Damage }}&nbsp; damage</div>
   {% endif %}
-  {% if power.0|get:"Attack Type" or power.0.Target %}
-  <div class="Attack_type">{{ power.0|get:"Attack Type"|bold_first|safe }}</div>{% if power.0.Target %}<div class="Target"><b>Target:</b> {{ power.0.Target }}</div>{% endif %}
-  <hr/>
-  {% endif %}
-  <div class="Flavor_text">{{ power.0.Flavor }}</div>
-  <div class="Keywords"><b>Keywords:</b> {{ power.0.Keywords }}</div>
-  {% if power.0.Trigger %}
-  <div class="Trigger"><b>Trigger:</b> {{ power.0.Trigger }}</div>
-  {% endif %}
-  {% if power.0|get:"Primary Target" %}
-  <div class="Primary_target"><b>Primary Target:</b> {{ power.0|get:"Primary Target" }}</div>
-  {% endif %}
-  {% if power.0|get:"Secondary Target" %}
-  <div class="Secondary_target"><b>Secondary Target:</b> {{ power.0|get:"Secondary Target" }}</div>
-  {% endif %}
-  {% if power.0.Attack %}
-  <div class="Attack"><b>Attack:</b> {{ power.0.Attack }}</div>
-  {% endif %}
-  {% if power.0.Hit%}
-  <div class="Hit"><b>Hit:</b> {{ power.0.Hit }}</div>
-  {% endif %}
-  {% if power.0.Miss %}
-  <div class="Miss"><b>Miss:</b> {{ power.0.Miss }}</div>
-  {% endif %}
-  {% if power.0.Effect %}
-  <div class="Effect"><b>Effect:</b> {{ power.0.Effect }}</div>
-  {% endif %}
-  {% if power.0|get:"Minor Action" %}
-  <div class="Minor_action"><b>Minor Action:</b> {{ power.0|get:"Minor Action" }}</div>
-  {% endif %}
-  {% if power.0|get:"Move Action" %}
-  <div class="Move_action"><b>Move Action:</b> {{ power.0|get:"Move Action" }}</div>
-  {% endif %}
-  {% if power.0|get:"Free Action" %}
-  <div class="Free_action"><b>Free Action:</b> {{ power.0|get:"Free Action" }}</div>
-  {% endif %}
-  {% if power.0|get:"Sustain Minor" %}
-  <div class="Sustain_minor"><b>Sustain Minor:</b> {{ power.0|get:"Minor Action" }}</div>
-  {% endif %}
-  {% if power.0.Requirement %}
-  <div class="Requirement"<b>Requirement:</b> {{ power.0.Requirement }}</div>
-  {% endif %}
-  {% if power.0.Prerequisite %}
-  <div class="Prerequisite"><b>Prerequisite:</b> {{ power.0.Prerequisite }}</div>
-  {% endif %}
+  <i>{{ power.0.Keywords }}</i></br>
+  <div class="Attack_type">{{ power.0|get:"Attack Type" }}</div><div class="Target"><b>Target:</b> {{ power.0.Target }}</div>
 </div>
+</div>
+{% if forloop.counter|divisibleby:"4" %}
+  </div><div class="row">
+{% endif %}
 {% endfor %}
+</div>
+{% endblock %}
+

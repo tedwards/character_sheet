@@ -1,108 +1,64 @@
 div.At-Will {
   background-color: white;
-  height: 500px;
-  width: 25%;
   border: solid;
   border-color: #006402;
   padding: 0px 2px 2px 2px;
 }
 
 div.At-Will_Title {
-  text-align: center;
   background-color: #006402;
   color: white;
-  width: 100%;
   padding-left: 2px;
 }
 
 div.Daily {
   background-color: white;
-  height: 500px;
-  width: 25%;
   border: solid;
   border-color: #808080;
   padding: 0px 2px 2px 2px;
 }
 
 div.Daily_Title {
-  text-align: center;
   background-color: #808080;
   color: white;
-  width: 100%;
   padding-left: 2px;
 }
 
 div.Encounter {
   background-color: white;
-  height: 500px;
-  width: 25%;
   border: solid;
   border-color: #a50002;
   padding: 0px 2px 2px 2px;
 }
 
 div.Encounter_Title {
-  text-align: center;
   background-color: #a50002;
   color: white;
-  width: 100%;
   padding-left: 2px;
   }
 
 div.Item {
   background-color: white;
-  height: 500px;
-  width: 25%;
   border: solid;
   border-color: #ff8e02;
   padding: 0px 2px 2px 2px;
 }
 
 div.Item_Title {
-  text-align: center;
   background-color: #ff8e02;
   color: white;
-  width: 100%;
   padding-left: 2px;
 }
 
 div.Attack_type {
   text-align: left;
-  vertical-align: top;
   display: inline-block;
-  width: 50%;
 }
 
 div.Target {
   text-align: left;
   display: inline-block;
-  width: 50%;
 }
-
-div.Flavor_text {
-  font-style: italic;
-  background-color: #E6E6B8;
-}
-
-div.Keywords {
-  display: inline-block;
-}
-
-div.Effect {
-  background-color: #E6E6B8;
-}
-
-div.Hit {
-  background-color: #E6E6B8;
-}
-
-div.Move_action{
-  background-color: #E6E6B8;
-}
-div.Sustain_minor {
-  background-color: #E6E6B8;
-}
-
 tr:nth_child(odd) {
   background-color: #FFFFFF;
 }
