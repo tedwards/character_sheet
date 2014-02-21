@@ -1,8 +1,8 @@
 <style>
-  tr:nth-child(even) {
-    background-color: #ffffff;
-  }
   tr:nth-child(odd) {
+    background-color: #ffffff;
+  }
+  tr:nth-child(even) {
     background-color: #999999;
   }
   li:nth-child(even) {
@@ -10,14 +10,25 @@
   }
   li:nth-child(even) {
     background-color: #999999;
+  }
+  th#At-Will.powercard {
+    background-color: #00CC00;
+  }
+  th#Encounter.powercard {
+    background-color: #CC0000;
+  }
+  th#Daily.powercard {
+    background-color: #555555;
   }
 </style>
+{% load sheet_extras %}
+
 <div name=name>{{ character.name }}</div><div name=level>{{ character.level }}</div>
 <div name=discription>alignment gender race class</div><div name=xp>{{ character.xp }}</div>
 </hr>
 
-Abilities
 <table>
+  <th colspan=2>Abilities</th>
   <tr><td>Score</td><td>Mod</td></tr>
   <tr><td>Str: {{ character.strength }}     </td><td>{{ character.strength_mod }}</td></tr>
   <tr><td>Con: {{ character.constitution }} </td><td>{{ character.constitution_mod }} </td></tr>
@@ -27,16 +38,16 @@ Abilities
   <tr><td>Cha: {{ character.charisma }}     </td><td>{{ character.charisma_mod }}</td></tr>
 </table></br>
 
-Defenses
 <table name="defenses">
+  <th colspan=2>Defenses</th>
   <tr><td>AC:   </td><td>{{ character.ac }}</td></tr>
   <tr><td>Fort: </td><td>{{ character.fortitude }}</td></tr>
   <tr><td>Ref:  </td><td>{{ character.reflex }}</td></tr>
   <tr><td>Will: </td><td>{{ character.will }}</td></tr>
 </table></br>
 
-Skills
 <table>
+  <th colspan=2>Skills</th>
   <tr><td>Acrobatics:   </td><td>{{ character.acrobatics }}</td></tr>
   <tr><td>Arcana:       </td><td>{{ character.arcana }}</td></tr>
   <tr><td>Athletics:    </td><td>{{ character.athletics }}</td></tr>
@@ -64,15 +75,17 @@ Combat Statistics and Skills
   <tr><td>Speed:              </td><td>{{ character.speed }}</td></tr>
 </table></br>
 
+<table id="power_table" >
 {% for power in character.powers %}
-<table width=33%>{{ power.0.name }}<br/>
+<table width=33%>
+  <th colspan=2 class="powercard" id="{{ power.0|get:'Power Usage' }}">{{ power.0.name }}</br>
   {% if power|length > 1%}
     {% for each in power %}
       {% if each.name != power.0.name %}
-        {{ each.name }}:&nbsp; +{{ each.AttackBonus}} vs. {{ each.Defense }},&nbsp; {{ each.Damage }}&nbsp; damage</br>
+      {{ each.name }}:&nbsp; +{{ each.AttackBonus}} vs. {{ each.Defense }},&nbsp; {{ each.Damage }}&nbsp; damage</br>
       {% endif %}
     {% endfor %}
-  {% endif %}
+  {% endif %}</th>
 
   {% for key, value in power.0.iteritems %}
     {% if key.0 != "_" and key != "Class" and key != "name" and value|length > 0 %}

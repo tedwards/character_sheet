@@ -11,7 +11,8 @@ from .forms import UploadFileForm
 def displayCharacter(request, character_id):
   character = Characters.objects.get(pk=character_id)
   context = {'character': character}
-  return render(request, 'char_sheet/sheet.html', context)
+  return render(request, 'char_sheet/sheet_test.html', context)
+ # return render(request, 'char_sheet/sheet.html', context)
 
 @login_required
 def userView(request):

@@ -1,0 +1,87 @@
+div.At-Will {
+  background-color: white;
+  width: 20%;
+  border: solid;
+  border-color: #006402;
+  padding: 0px 2px 2px 2px;
+}
+
+div.At-Will_Title {
+  background-color: #006402;
+  color: white;
+  width: 100%;
+  padding-left: 2px;
+}
+
+div.Daily {
+  background-color: white;
+  width: 20%;
+  border: solid;
+  border-color: #808080;
+  padding: 0px 2px 2px 2px;
+}
+
+div.Daily_Title {
+  background-color: #808080;
+  color: white;
+  width: 100%;
+  padding-left: 2px;
+}
+
+div.Encounter {
+  background-color: white;
+  width: 20%;
+  border: solid;
+  border-color: #a50002;
+  padding: 0px 2px 2px 2px;
+}
+
+div.Encounter_Title {
+  background-color: #a50002;
+  color: white;
+  width: 100%;
+  padding-left: 2px;
+  }
+
+div.Item {
+  background-color: white;
+  width: 20%;
+  border: solid;
+  border-color: #ff8e02;
+  padding: 0px 2px 2px 2px;
+}
+
+div.Item_Title {
+  background-color: #ff8e02;
+  color: white;
+  width: 100%;
+  padding-left: 2px;
+}
+
+div.Attack_type {
+  text-align: left;
+  display: inline-block;
+  width: 50%;
+}
+
+div.Target {
+  text-align: left;
+  display: inline-block;
+  width: 50%;
+}
+tr:nth_child(odd) {
+  background-color: #FFFFFF;
+}
+
+tr:nth-child(even) {
+  background-color: #999999;
+}
+
+li:nth_child(odd) {
+  background-color: #FFFFFF;
+}
+
+li:nth-child(even) {
+  background-color: #999999;
+}
+
