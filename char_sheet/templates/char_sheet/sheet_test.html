@@ -64,7 +64,50 @@ Combat Statistics and Skills
   {% if power|length > 1%}
   <div class="Weapon">{{ power.1.name }}:&nbsp; +{{ power.1.AttackBonus}} vs. {{ power.1.Defense }},&nbsp; {{ power.1.Damage }}&nbsp; damage</div>
   {% endif %}
-  <i>{{ power.0.Keywords }}</i></br>
-  <div class="Attack_type">{{ power.0|get:"Attack Type" }}</div><div class="Target"><b>Target:</b> {{ power.0.Target }}</div>
+  {% if power.0|get:"Attack Type" or power.0.Target %}
+  <div class="Attack_type">{{ power.0|get:"Attack Type"|bold_first|safe }}</div>{% if power.0.Target %}<div class="Target"><b>Target:</b> {{ power.0.Target }}</div>{% endif %}
+  <hr/>
+  {% endif %}
+  <div class="Flavor_text">{{ power.0.Flavor }}</div>
+  <div class="Keywords"><b>Keywords:</b> {{ power.0.Keywords }}</div>
+  {% if power.0.Trigger %}
+  <div class="Trigger"><b>Trigger:</b> {{ power.0.Trigger }}</div>
+  {% endif %}
+  {% if power.0|get:"Primary Target" %}
+  <div class="Primary_target"><b>Primary Target:</b> {{ power.0|get:"Primary Target" }}</div>
+  {% endif %}
+  {% if power.0|get:"Secondary Target" %}
+  <div class="Secondary_target"><b>Secondary Target:</b> {{ power.0|get:"Secondary Target" }}</div>
+  {% endif %}
+  {% if power.0.Attack %}
+  <div class="Attack"><b>Attack:</b> {{ power.0.Attack }}</div>
+  {% endif %}
+  {% if power.0.Hit%}
+  <div class="Hit"><b>Hit:</b> {{ power.0.Hit }}</div>
+  {% endif %}
+  {% if power.0.Miss %}
+  <div class="Miss"><b>Miss:</b> {{ power.0.Miss }}</div>
+  {% endif %}
+  {% if power.0.Effect %}
+  <div class="Effect"><b>Effect:</b> {{ power.0.Effect }}</div>
+  {% endif %}
+  {% if power.0|get:"Minor Action" %}
+  <div class="Minor_action"><b>Minor Action:</b> {{ power.0|get:"Minor Action" }}</div>
+  {% endif %}
+  {% if power.0|get:"Move Action" %}
+  <div class="Move_action"><b>Move Action:</b> {{ power.0|get:"Move Action" }}</div>
+  {% endif %}
+  {% if power.0|get:"Free Action" %}
+  <div class="Free_action"><b>Free Action:</b> {{ power.0|get:"Free Action" }}</div>
+  {% endif %}
+  {% if power.0|get:"Sustain Minor" %}
+  <div class="Sustain_minor"><b>Sustain Minor:</b> {{ power.0|get:"Minor Action" }}</div>
+  {% endif %}
+  {% if power.0.Requirement %}
+  <div class="Requirement"<b>Requirement:</b> {{ power.0.Requirement }}</div>
+  {% endif %}
+  {% if power.0.Prerequisite %}
+  <div class="Prerequisite"><b>Prerequisite:</b> {{ power.0.Prerequisite }}</div>
+  {% endif %}
 </div>
 {% endfor %}

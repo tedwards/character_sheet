@@ -1,12 +1,14 @@
 div.At-Will {
   background-color: white;
-  width: 20%;
+  height: 500px;
+  width: 25%;
   border: solid;
   border-color: #006402;
   padding: 0px 2px 2px 2px;
 }
 
 div.At-Will_Title {
+  text-align: center;
   background-color: #006402;
   color: white;
   width: 100%;
@@ -15,13 +17,15 @@ div.At-Will_Title {
 
 div.Daily {
   background-color: white;
-  width: 20%;
+  height: 500px;
+  width: 25%;
   border: solid;
   border-color: #808080;
   padding: 0px 2px 2px 2px;
 }
 
 div.Daily_Title {
+  text-align: center;
   background-color: #808080;
   color: white;
   width: 100%;
@@ -30,13 +34,15 @@ div.Daily_Title {
 
 div.Encounter {
   background-color: white;
-  width: 20%;
+  height: 500px;
+  width: 25%;
   border: solid;
   border-color: #a50002;
   padding: 0px 2px 2px 2px;
 }
 
 div.Encounter_Title {
+  text-align: center;
   background-color: #a50002;
   color: white;
   width: 100%;
@@ -45,13 +51,15 @@ div.Encounter_Title {
 
 div.Item {
   background-color: white;
-  width: 20%;
+  height: 500px;
+  width: 25%;
   border: solid;
   border-color: #ff8e02;
   padding: 0px 2px 2px 2px;
 }
 
 div.Item_Title {
+  text-align: center;
   background-color: #ff8e02;
   color: white;
   width: 100%;
@@ -60,6 +68,7 @@ div.Item_Title {
 
 div.Attack_type {
   text-align: left;
+  vertical-align: top;
   display: inline-block;
   width: 50%;
 }
@@ -69,6 +78,31 @@ div.Target {
   display: inline-block;
   width: 50%;
 }
+
+div.Flavor_text {
+  font-style: italic;
+  background-color: #E6E6B8;
+}
+
+div.Keywords {
+  display: inline-block;
+}
+
+div.Effect {
+  background-color: #E6E6B8;
+}
+
+div.Hit {
+  background-color: #E6E6B8;
+}
+
+div.Move_action{
+  background-color: #E6E6B8;
+}
+div.Sustain_minor {
+  background-color: #E6E6B8;
+}
+
 tr:nth_child(odd) {
   background-color: #FFFFFF;
 }
